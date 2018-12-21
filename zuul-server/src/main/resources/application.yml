@@ -1,0 +1,22 @@
+eureka:
+  client:
+    service-url:
+     defaultZone: http://localhost:8000/eureka/
+server:
+  port: 8100
+spring:
+  application:
+    name: zuul-server
+zuul:
+  routes:
+   api-a:
+    path: /api-a/**
+    serviceId: eureka-ribbon-client
+   api-b:
+    path: /api-b/**
+    serviceId: spring-cloud-consumer
+  retryable: true
+  add-proxy-headers: false
+ribbon:
+ ReadTimeout: 3000
+ SocketTimeout: 3000
